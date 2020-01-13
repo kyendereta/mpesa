@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
       it {is_expected.to validate_presence_of(:first_name)}
       it {is_expected.to validate_presence_of(:last_name)}
       it {is_expected.to validate_presence_of(:phone_number)}
-      it {is_expected.to validate_presence_of(:password)}
+      it {is_expected.to validate_presence_of(:password_digest)}
       it {is_expected.to validate_presence_of(:id_number)}
     
       it {is_expected.to validate_numericality_of (:pin) } 
@@ -89,6 +89,10 @@ RSpec.describe User, type: :model do
       pass = ["pass@WORD34", 'passworD%56']
       pass.each do |p|
         it {is_expected.to allow_value(p).for (:password)}
+     end
+
+     context 'password should be secure' do
+      it {is_expected.to have_secure_password }
      end
     end
 
